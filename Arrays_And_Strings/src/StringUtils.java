@@ -32,9 +32,43 @@ public class StringUtils {
 					return false;
 				}
 			}
+		} else {
+			return false;
 		}
 		return true;
 	}
 
+	public static String encodeString(String str, char characterToReplace, String encoder) {
+		char[] characters = str.toCharArray();
+		
+		//how many characters need replacing
+		int charactersToReplace = 0;
+		for(char character : characters) {
+			if(characterToReplace ==  character) {
+				charactersToReplace ++;
+			}
+		}
+		
+		//how long is the encoder
+		int encoderLength = encoder.length();
+		
+		int index = 0;
+		char[] convertedString = new char[str.length() + (charactersToReplace * encoderLength)];
+		char[] encoderCharacters = encoder.toCharArray();
+		for(int i = 0; i < str.length(); i++) {
+			char character = characters[i];
+			if(characterToReplace == character) {
+				for(int j = 0; j < encoder.length(); j++) {
+					convertedString[index] = encoderCharacters[j];
+					index++;
+				}
+			} else {
+				convertedString[index] = character;
+				index++;
+			}
+		}
+		
+		return String.valueOf(convertedString).trim();
+	}
 
 }

@@ -1,4 +1,4 @@
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -33,6 +33,7 @@ public class StringUtilsTest {
 	/**
 	 * Determine if one string is a permutation of the other.
 	 */
+	@Test
 	public void shouldDetermineLikenessOfStrings() {
 		//permutation
 		String str1 = "micro";
@@ -44,10 +45,23 @@ public class StringUtilsTest {
 		str2 = "nomo";
 		assertTrue(StringUtils.permutation(str1, str2));
 		
-		//not permutation
+		//not permutation different lengths
 		str1 = "micr";
+		str2 = "croim";
+		assertFalse(StringUtils.permutation(str1, str2));
+		
+		//not permutation same lengths
+		str1 = "micrb";
 		str2 = "croim";
 		assertFalse(StringUtils.permutation(str1, str2));
 	}
 
+	/**
+	 * Replace all spaces with %20
+	 */
+	@Test
+	public void shouldReplaceAllSpacesWithPercent20() {
+		String str1 = "Hi, this is Steve.";
+		assertEquals("Hi,%20this%20is%20Steve.", StringUtils.encodeString(str1, ' ', "%20"));
+	}
 }
