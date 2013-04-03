@@ -54,6 +54,11 @@ public class StringUtilsTest {
 		str1 = "micrb";
 		str2 = "croim";
 		assertFalse(StringUtils.permutation(str1, str2));
+		
+		//not permutation same lengths
+		str1 = "aba";
+		str2 = "bab";
+		assertFalse(StringUtils.permutation(str1, str2));
 	}
 
 	/**
@@ -63,5 +68,20 @@ public class StringUtilsTest {
 	public void shouldReplaceAllSpacesWithPercent20() {
 		String str1 = "Hi, this is Steve.";
 		assertEquals("Hi,%20this%20is%20Steve.", StringUtils.encodeString(str1, ' ', "%20"));
+	}
+	
+	/**
+	 * Compress string characters. aabbbcdde => a2b3cd2e
+	 */
+	@Test
+	public void shouldCompressStringCharacters() {
+		String val = "aadddfllllc";
+		assertEquals("a2d3fl4c", StringUtils.compress(val));
+	}
+	
+	@Test
+	public void shouldReturnOriginalValueIfNotCompressing() {
+		String val = "abcd";
+		assertEquals("abcd", StringUtils.compress(val));
 	}
 }
